@@ -1,0 +1,22 @@
+<FrameLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/applicationframe"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFEEEEEE">
+		<com.qoppa.samples.viewer.QScrollView
+			android:id="@+id/scrollview"
+			android:layout_gravity="center"
+			android:background="#FFEEEEEE"
+	    	android:layout_width="wrap_content"
+		    android:layout_height="wrap_content">
+	    	<LinearLayout
+				android:id="@+id/pagepane"
+				android:background="#FFEEEEEE"
+				android:gravity="center_horizontal"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+			</LinearLayout>
+		</com.qoppa.samples.viewer.QScrollView>
+</FrameLayout>
