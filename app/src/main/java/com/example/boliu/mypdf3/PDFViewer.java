@@ -10,7 +10,9 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.text.Editable;
 import android.text.InputType;
@@ -24,6 +26,15 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.qoppa.android.pdf.IPassword;
+import com.qoppa.android.pdf.Layer;
+import com.qoppa.android.pdf.PDFException;
+import com.qoppa.android.pdf.annotations.AnnotationFactory;
+import com.qoppa.android.pdf.annotations.Circle;
+import com.qoppa.android.pdf.annotations.FreeText;
+import com.qoppa.android.pdf.annotations.WidgetRadioButton;
+import com.qoppa.android.pdf.form.AcroForm;
+import com.qoppa.android.pdf.form.FormField;
+import com.qoppa.android.pdf.form.RadioButtonGroupField;
 import com.qoppa.android.pdf.source.FilePDFSource;
 import com.qoppa.android.pdf.source.InputStreamPDFSource;
 import com.qoppa.android.pdfProcess.PDFDocument;
@@ -35,7 +46,7 @@ public class PDFViewer implements IPassword
 	private QScrollView svScroll;
 
 	private float m_CurrentScale;
-	private PDFDocument m_Document;
+	public PDFDocument m_Document;
 	private float m_FitToWidth;
 	private LRUCache m_PageContentsCache;
 	private Vector<PDFPageView> m_PageViews;
@@ -507,7 +518,9 @@ public class PDFViewer implements IPassword
 				else
 				{
 					setupDocument(m_LoadedDoc);
-				}
+                    addCircle();
+
+                }
 			}
 			catch (Throwable t)
 			{
@@ -580,4 +593,62 @@ public class PDFViewer implements IPassword
 			}
 		});
 	}
+
+    public void addATest() {
+        RectF myrectf = new RectF();
+
+
+        FreeText referenceToAnnotation = AnnotationFactory.createFreeText("hello world");
+        referenceToAnnotation.setName("signnow");
+        referenceToAnnotation.setColor(Color.BLUE);
+        referenceToAnnotation.setCreator("signnow_text_field_required_");
+       // referenceToAnnotation.setFontSize(20);
+
+        referenceToAnnotation.setBorderWidth(10);
+        referenceToAnnotation
+                .setBorderStyle(com.qoppa.android.pdf.annotations.Annotation.BORDERSTYLE_SOLID);
+        myrectf.set(10, 10,
+                200,
+                200);
+        referenceToAnnotation.setRectangle(myrectf);
+        referenceToAnnotation.setAlignHorizontal(FreeText.ALIGN_CENTER);
+        referenceToAnnotation.setAlignVertical(FreeText.ALIGN_CENTER);
+
+        try {
+            m_Document.getPage(0).addAnnotation(referenceToAnnotation);
+        } catch (com.qoppa.android.pdf.PDFException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addCircle() {
+        RectF myrectf = new RectF();
+
+
+        Circle referenceToAnnotation = AnnotationFactory.createCircle("hello world");
+        referenceToAnnotation.setName("signnow");
+        referenceToAnnotation.setColor(Color.RED);
+        referenceToAnnotation.setCreator("signnow_text_field_required_");
+        referenceToAnnotation.setBorderWidth(1);
+     //   referenceToAnnotation
+     //           .setBorderStyle(com.qoppa.android.pdf.annotations.Annotation.BORDERSTYLE_SOLID);
+        referenceToAnnotation.setHasFillColor(true);
+        myrectf.set(100, 100,
+                120,
+                120);
+        referenceToAnnotation.setInternalColor(Color.BLUE);
+        referenceToAnnotation.setRectangle(myrectf);
+
+
+
+
+
+
+        try {
+            m_Document.getPage(0).addAnnotation(referenceToAnnotation);
+        } catch (com.qoppa.android.pdf.PDFException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

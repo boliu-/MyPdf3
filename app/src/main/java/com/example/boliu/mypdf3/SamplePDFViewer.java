@@ -2,6 +2,7 @@ package com.example.boliu.mypdf3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import android.app.Activity;
@@ -9,6 +10,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -19,10 +21,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.qoppa.android.pdf.annotations.AnnotationFactory;
+import com.qoppa.android.pdf.annotations.FreeText;
+import com.qoppa.pdf.IPassword;
+import com.qoppa.pdf.PDFException;
+import com.qoppa.pdfImages.PDFImages;
 
-public class SamplePDFViewer extends Activity
-{
+
+public class SamplePDFViewer extends Activity {
 	private PDFViewer m_PDFViewer;
+    private static final String path = "";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -108,16 +116,17 @@ public class SamplePDFViewer extends Activity
 	{
 		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		final EditText input = new EditText(this);
-		input.setText(Environment.getExternalStorageDirectory().getPath()+"/");
+		input.setText("/sdcard/signnow/9082502_blank.pdf");
 		alert.setView(input);
-		alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() 
-		{
-			public void onClick(DialogInterface dialog, int whichButton) 
-			{
-				m_PDFViewer.loadDocument(input.getText().toString());
-			}
-		});
+        AlertDialog.Builder ok = alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            String mInputPath = input.getText().toString();
 
+            public void onClick(DialogInterface dialog, int whichButton) {
+                m_PDFViewer.loadDocument(mInputPath);
+            }
+        });
+        // Open the PDF file
+;
 		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
 		{
 			public void onClick(DialogInterface dialog, int whichButton) 
@@ -125,6 +134,8 @@ public class SamplePDFViewer extends Activity
 				dialog.cancel();
 			}
 		});
+
 		alert.show();
 	}
+
 }
