@@ -522,7 +522,7 @@ public class PDFViewer implements IPassword
 				else
 				{
 					setupDocument(m_LoadedDoc);
-                    addATest();
+                    CircleFieldSeleced();
                 }
 			}
 			catch (Throwable t)
@@ -597,14 +597,14 @@ public class PDFViewer implements IPassword
 		});
 	}
 
-    public void addATest() {
+    public void SetACircleField() {
         RectF myrectf = new RectF();
 
 
-        FreeText referenceToAnnotation = AnnotationFactory.createFreeText(String.valueOf(Html.fromHtml("&#9675;")));
+        FreeText referenceToAnnotation = AnnotationFactory.createFreeText(String.valueOf(Html.fromHtml("&#9711;")));
         // this could be a circle
         referenceToAnnotation.setTextColor(Color.WHITE);
-        referenceToAnnotation.setFontSize(32);
+        referenceToAnnotation.setFontSize(33);
 
         referenceToAnnotation.setName("signnow");
         referenceToAnnotation.setColor(Color.BLUE);
@@ -630,7 +630,42 @@ public class PDFViewer implements IPassword
         }
     }
 
-    public void addCircle() {
+    public void CircleFieldSeleced() {
+        RectF myrectf = new RectF();
+
+
+        FreeText referenceToAnnotation = AnnotationFactory.createFreeText(String.valueOf(Html.fromHtml("&#9711;")));
+        // this could be a circle
+        referenceToAnnotation.setTextColor(Color.BLACK);
+        referenceToAnnotation.setFontSize(30);
+
+        referenceToAnnotation.setName("signnow");
+        referenceToAnnotation.setColor(15135223);
+        referenceToAnnotation.setCreator("signnow_text_field_required_");
+        referenceToAnnotation.setBorderColor(15135223);
+
+
+
+        //  referenceToAnnotation.setBorderWidth(1);
+        //  referenceToAnnotation
+        //         .setBorderStyle(com.qoppa.android.pdf.annotations.Annotation.BORDERSTYLE_SOLID);
+        referenceToAnnotation.setAlignHorizontal(FreeText.ALIGN_CENTER);
+        referenceToAnnotation.setAlignVertical(FreeText.ALIGN_CENTER);
+        myrectf.set(100, 100,
+                140,
+                140);
+        referenceToAnnotation.setRectangle(myrectf);
+
+
+        try {
+            m_Document.getPage(0).addAnnotation(referenceToAnnotation);
+        } catch (com.qoppa.android.pdf.PDFException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void PrintingCIrcleField() {
         RectF myrectf = new RectF();
 
 
