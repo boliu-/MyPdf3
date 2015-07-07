@@ -10,7 +10,6 @@ import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.text.Editable;
-import android.text.Html;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -591,24 +590,13 @@ public class PDFViewer implements IPassword
         RectF myrectf = new RectF();
 
 
-        FreeText referenceToAnnotation = AnnotationFactory.createFreeText(String.valueOf(Html.fromHtml("&#9711;")));
-        // this could be a circle
+        FreeText referenceToAnnotation = AnnotationFactory.createFreeText("Hello world");
         referenceToAnnotation.setTextColor(Color.WHITE);
-        referenceToAnnotation.setFontSize(33);
-
-        referenceToAnnotation.setName("signnow");
         referenceToAnnotation.setColor(Color.BLUE);
-        referenceToAnnotation.setCreator("signnow_text_field_required_");
-
-
-
-      //  referenceToAnnotation.setBorderWidth(1);
-      //  referenceToAnnotation
-       //         .setBorderStyle(com.qoppa.android.pdf.annotations.Annotation.BORDERSTYLE_SOLID);
         referenceToAnnotation.setAlignHorizontal(FreeText.ALIGN_CENTER);
         referenceToAnnotation.setAlignVertical(FreeText.ALIGN_CENTER);
         myrectf.set(100, 100,
-                140,
+                240,
                 140);
         referenceToAnnotation.setRectangle(myrectf);
 
