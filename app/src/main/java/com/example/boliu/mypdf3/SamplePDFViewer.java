@@ -1,31 +1,20 @@
 package com.example.boliu.mypdf3;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 
-import com.qoppa.android.pdf.annotations.AnnotationFactory;
-import com.qoppa.android.pdf.annotations.FreeText;
-import com.qoppa.pdf.IPassword;
-import com.qoppa.pdf.PDFException;
-import com.qoppa.pdfImages.PDFImages;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class SamplePDFViewer extends Activity {
@@ -122,11 +111,11 @@ public class SamplePDFViewer extends Activity {
             String mInputPath = input.getText().toString();
 
             public void onClick(DialogInterface dialog, int whichButton) {
+				mInputPath = input.getText().toString();
                 m_PDFViewer.loadDocument(mInputPath);
             }
         });
         // Open the PDF file
-;
 		alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() 
 		{
 			public void onClick(DialogInterface dialog, int whichButton) 
