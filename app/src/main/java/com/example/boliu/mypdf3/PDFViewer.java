@@ -512,7 +512,7 @@ public class PDFViewer implements IPassword
 				else
 				{
 					setupDocument(m_LoadedDoc);
-					SetACircleField();
+					addAnnotationAtLeftTop();
 				}
 			}
 			catch (Throwable t)
@@ -587,7 +587,7 @@ public class PDFViewer implements IPassword
 		});
 	}
 
-    public void SetACircleField() {
+    public void addAnnotationAtLeftTop() {
         RectF myrectf = new RectF();
 
 
