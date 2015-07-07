@@ -1,18 +1,11 @@
 package com.example.boliu.mypdf3;
 
-import java.io.InputStream;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Vector;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.os.AsyncTask;
@@ -29,20 +22,16 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.qoppa.android.pdf.IPassword;
-import com.qoppa.android.pdf.Layer;
-import com.qoppa.android.pdf.PDFException;
 import com.qoppa.android.pdf.annotations.AnnotationFactory;
-import com.qoppa.android.pdf.annotations.Circle;
 import com.qoppa.android.pdf.annotations.FreeText;
-import com.qoppa.android.pdf.annotations.WidgetRadioButton;
-import com.qoppa.android.pdf.form.AcroForm;
-import com.qoppa.android.pdf.form.FormField;
-import com.qoppa.android.pdf.form.RadioButtonGroupField;
 import com.qoppa.android.pdf.source.FilePDFSource;
 import com.qoppa.android.pdf.source.InputStreamPDFSource;
 import com.qoppa.android.pdfProcess.PDFDocument;
-import com.qoppa.android.pdfProcess.PDFPaint;
 import com.qoppa.android.pdfViewer.fonts.StandardFontTF;
+
+import java.io.InputStream;
+import java.util.LinkedHashMap;
+import java.util.Vector;
 
 public class PDFViewer implements IPassword
 {
@@ -476,6 +465,7 @@ public class PDFViewer implements IPassword
 			try
 			{
 				// release the current document
+				m_LoadedDoc = null;
 				if (path[0] instanceof String)
 				{
 					m_LoadedDoc = new PDFDocument(new FilePDFSource((String) path[0]), PDFViewer.this);
@@ -522,8 +512,8 @@ public class PDFViewer implements IPassword
 				else
 				{
 					setupDocument(m_LoadedDoc);
-                    CircleFieldSeleced();
-                }
+					SetACircleField();
+				}
 			}
 			catch (Throwable t)
 			{
@@ -630,85 +620,7 @@ public class PDFViewer implements IPassword
         }
     }
 
-    public void CircleFieldSeleced() {
-        RectF myrectf = new RectF();
 
 
-        FreeText referenceToAnnotation = AnnotationFactory.createFreeText(String.valueOf(Html.fromHtml("&#9711;")));
-        // this could be a circle
-        referenceToAnnotation.setTextColor(Color.BLACK);
-        referenceToAnnotation.setFontSize(30);
-
-        referenceToAnnotation.setName("signnow");
-        referenceToAnnotation.setColor(15135223);
-        referenceToAnnotation.setCreator("signnow_text_field_required_");
-        referenceToAnnotation.setBorderColor(15135223);
-
-
-
-        //  referenceToAnnotation.setBorderWidth(1);
-        //  referenceToAnnotation
-        //         .setBorderStyle(com.qoppa.android.pdf.annotations.Annotation.BORDERSTYLE_SOLID);
-        referenceToAnnotation.setAlignHorizontal(FreeText.ALIGN_CENTER);
-        referenceToAnnotation.setAlignVertical(FreeText.ALIGN_CENTER);
-        myrectf.set(100, 100,
-                140,
-                140);
-        referenceToAnnotation.setRectangle(myrectf);
-
-
-        try {
-            m_Document.getPage(0).addAnnotation(referenceToAnnotation);
-        } catch (com.qoppa.android.pdf.PDFException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    public void PrintingCIrcleField() {
-        RectF myrectf = new RectF();
-
-
-        Circle referenceToAnnotation = AnnotationFactory.createCircle("hello world");
-        referenceToAnnotation.setName("signnow");
-        referenceToAnnotation.setColor(Color.RED);
-        referenceToAnnotation.setCreator("signnow_text_field_required_");
-        referenceToAnnotation.setBorderWidth(1);
-     //   referenceToAnnotation
-     //           .setBorderStyle(com.qoppa.android.pdf.annotations.Annotation.BORDERSTYLE_SOLID);
-        referenceToAnnotation.setHasFillColor(true);
-        myrectf.set(100, 100,
-                120,
-                120);
-        referenceToAnnotation.setInternalColor(Color.BLUE);
-
-
-        //the PDFCanvas object is used to draw to the page
-//        Canvas canvas = null;
-//        canvas = new Canvas();
-//        // 创建画笔
-//        Paint p = new Paint();
-//        p.setColor(Color.RED);// 设置红色
-//        canvas.drawRect(60, 60, 80, 80, p);// 正方形
-//        canvas.drawText("画扇形和椭圆:", 10, 120, p);
-//
-//        referenceToAnnotation.print(canvas);
-//        referenceToAnnotation.paint(canvas,true);
-        referenceToAnnotation.setRectangle(myrectf);
-
-
-
-
-
-
-
-
-
-        try {
-            m_Document.getPage(0).addAnnotation(referenceToAnnotation);
-        } catch (com.qoppa.android.pdf.PDFException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:id="@+id/open"
-          android:title="Open document" />
+	<item android:id="@+id/open1"
+          android:title="Open document 1" />
+    <item android:id="@+id/open2"
+        android:title="Open document 2" />
+    <item android:id="@+id/open3"
+        android:title="Open document with rotation" />
+    <item android:id="@+id/open4"
+        android:title="Open document from SDcard" />
 </menu>

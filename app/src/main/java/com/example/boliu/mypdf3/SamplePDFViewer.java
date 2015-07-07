@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 
@@ -39,10 +40,13 @@ public class SamplePDFViewer extends Activity {
 		else
 		{
 			//Display a dialog to prompt for a file path to load
-			showPathEntryDialog();
-			
-			//Alternativetly, some default document could be loaded with:
-			//m_PDFViewer.loadDocument("/sdcard/default.pdf");
+			InputStream mInput = null;
+			try {
+				mInput = getAssets().open("docs/nonRotation1.pdf");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			m_PDFViewer.loadDocument(mInput);
 		}
 	}
 	
@@ -67,15 +71,37 @@ public class SamplePDFViewer extends Activity {
 	@Override 
 	public boolean onOptionsItemSelected(MenuItem item) 
 	{
-		if(item.getItemId() == R.id.open)
-		{
-			showPathEntryDialog();
-			return true;
+		InputStream mInput = null;
+		switch (item.getItemId()) {
+			case R.id.open1 :
+				try {
+					mInput = getAssets().open("docs/nonRotation1.pdf");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			case R.id.open2 :
+				try {
+					mInput = getAssets().open("docs/nonRotation2.pdf");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			case R.id.open3 :
+				try {
+					mInput = getAssets().open("docs/haveRotation.pdf");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				break;
+			case R.id.open4 :
+				showPathEntryDialog();
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
 		}
-		else
-		{
-			return super.onOptionsItemSelected(item);
-		}
+		m_PDFViewer.loadDocument(mInput);
+		return true;
 	}
 	
 	private void loadFromUri(Uri uri)
